@@ -16,6 +16,8 @@ const NavigateRoute = (props) => {
   const history = useHistory();
 
   const handleKeyDown = (event) => {
+    if (containerRef.current !== document.activeElement) return;
+
     const current = +window.location.pathname.substr(-1);
     if (event.key === 'ArrowRight') {
       history.push({ pathname: slides[current + 1]?.path });

@@ -7,7 +7,7 @@ const Component = () => {
   const [text, setText] = useState('Efeito')
 
   useEffect(() => {
-    message.warning('executando efeito');
+    // message.warning('executando efeito');
   }, [])
 
   return (

@@ -1,28 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../components/Header';
-import reactHooksLogo from '../assets/reactHooks.png';
+import { TextBackground } from '../components/TextBackground';
+import { Author } from '../components/Author';
 
 export const Wrapper = styled.div`
   flex: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  justify-content: center;
   align-items: center;
+  height: 100%;
+  padding: 30px;
+  & > h1 {
+    margin-bottom: 0;
+  }
+
+  & > span {
+    margin-bottom: 30px;
+  }
 `;
 
 export const Logo = styled.img`
   width: 300px;
-  margin-top: 25px;
+  margin-bottom: 4rem;
 `;
 
 const Slide0 = () => {
   return (
     <Wrapper>
-      <Header>Controle e criação de efeitos com useEffect()</Header>
-      <Logo src={reactHooksLogo} alt='styled-components' />
+      <div>
+        <Header>Controle e criação de efeitos com</Header>
+        <TextBackground>USE EFFECT</TextBackground>
+        <Author />
+      </div>
     </Wrapper>
   );
 };

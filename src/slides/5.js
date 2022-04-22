@@ -4,27 +4,44 @@ import { LiveProvider, LiveEditor, LivePreview } from 'react-live';
 import { Button, Input, message } from 'antd';
 
 const code = `
-const Component = () => {
-  const [text, setText] = useState('Cleanup')
+function Reddit() {
+  const [text, setText] = useState('Efeito')
+  // const [isLoading, setIsLoading] = useState(false)
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    message.success('Use Effect Without Parameter');
-  })
+    async function fetchData() {
+      // setIsLoading(true)
+      const res = await fetch(
+        "https://www.reddit.com/r/reactjs.json"
+      );
+
+      // setIsLoading(false)
+      const json = await res.json();
+
+      setPosts(json.data.children.map(c => c.data));
+    }
+
+    fetchData();
+  }); // <-- we didn't pass a value. what do you think will happen?
 
   return (
-    <Container>
-      <InputWrapper>
+    <>
+      <ButtonWrapper>
         <Input value={text} onChange={(e) => setText(e.target.value)}/>
-      </InputWrapper>
-      <Text align="center">
-        {text}
-      </Text>
-    </Container>
-  )
+      </ButtonWrapper>
+      {/* {isLoading && 'LOADING…'} */}
+      <ul>
+        {posts.map(post => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
+    </>
+  );
 }
 
 render(
-  <Component/>
+  <Reddit/>
 );`;
 
 const Container = styled.div`
@@ -49,7 +66,7 @@ const Text = styled.h2`
   }
 `;
 
-const InputWrapper = styled.div`
+const ButtonWrapper = styled.div`
   margin: 10px auto;
   width: 200px;
   height: 60px;
@@ -65,7 +82,7 @@ const Slide2 = () => {
     Header,
     Text,
     Button,
-    InputWrapper,
+    ButtonWrapper,
   };
   return (
     <div className='slide slide-row slide-1'>
